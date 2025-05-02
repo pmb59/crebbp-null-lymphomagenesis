@@ -18,6 +18,9 @@ rm(Bcells.combined, temp)
 
 # Extract data
 write.csv(x=t(as.matrix(GetAssayData(object = selected_data, slot = "counts"))) , file = "counts.csv", append = FALSE, quote = FALSE, sep = "\t", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE)
+# or to select RNA
+write.csv(x=t(as.matrix(GetAssayData(object = selected_data, assay = "RNA", slot = "data"))) , file = "rna.csv", append = FALSE, quote = FALSE, sep = "\t", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE)
+
 write.csv(x=selected_data$seurat_clusters, file = "meta.csv", sep = "\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
 write.csv(x=selected_datacondition, file = "condition.csv", sep = "\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
 write.csv(x=selected_data$replicate, file = "replicate.csv", sep = "\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
