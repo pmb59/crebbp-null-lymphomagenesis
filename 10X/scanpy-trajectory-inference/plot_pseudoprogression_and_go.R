@@ -18,15 +18,10 @@ run_select_optimal_K = FALSE
 N = 20     # Enriched GOs to plot
 
 # read Seurat Data
-Bcells.combined <- readRDS(file ='seurat3_all.rds')   # no TLEU, MT 5%, res=0.4
-
+Bcells.combined <- readRDS(file ='seurat3_all.rds')
 temp  <- SubsetData(object=Bcells.combined, subset.name = "batch", accept.value = ALLOW_CONDS )  #  NO contaminants c(0:9,12)
-
 WT_Bcells  <- SubsetData(object=temp, subset.name = "seurat_clusters", accept.value = CLUSTER )  #  NO contaminants c(0:9,12)
-
 rm(Bcells.combined, temp)
-
-
 
 setwd(paste0( "./PAGA/", FOLDER)  )
 ######################################################################
@@ -37,7 +32,6 @@ ptime <- read.csv( paste0("pseudotime_Cluster_" ,CLUSTER, ".csv" ) , header =TRU
 colnames(ptime)[1] <- 'cell_name'
 x <- t(as.matrix(GetAssayData(object = WT_Bcells, assay = "RNA", slot = "data")) )    # 'data' or 'scaled.data' or 'counts'
 x <- as.data.frame( x )
-
 
 # find most variable genes IN THIS SET OF CELLS
 library(transcripTools)
@@ -78,7 +72,6 @@ if (run_select_optimal_K == TRUE) {
   gap_stat <- clusGap(t(Ly), FUN = kmeans, nstart = 25, K.max = 10, B = 50)
   print(gap_stat, method = "firstmax")
   fviz_gap_stat(gap_stat)
-
 }
 
 library(fda.usc)
@@ -134,21 +127,19 @@ barplot(table(km$cluster) , xlab='pattern' , ylab='number of genes', fill='blue'
 dev.off()
 
 
-
-
 library(circlize)
 library(ComplexHeatmap)
 
-ha = rowAnnotation(df = as.data.frame( as.character(cl) ), name='cluster', show_annotation_name = FALSE)
+ha <- rowAnnotation(df = as.data.frame( as.character(cl) ), name='cluster', show_annotation_name = FALSE)
 
-Condition = factor( ptime$batch[sortPseudo] )
-
-
-Pseudotime = ptime$dpt_pseudotime[sortPseudo]
-col_fun = colorRamp2(c(0, 0.5, 1), c("white", "gray", "black")) 
+Condition <- factor( ptime$batch[sortPseudo] )
 
 
-hb = HeatmapAnnotation(Condition= Condition , Pseudotime = Pseudotime ,
+Pseudotime <- ptime$dpt_pseudotime[sortPseudo]
+col_fun <- colorRamp2(c(0, 0.5, 1), c("white", "gray", "black")) 
+
+
+hb <- HeatmapAnnotation(Condition= Condition , Pseudotime = Pseudotime ,
                        show_annotation_name = TRUE, which = "column", col=list(Pseudotime = col_fun, Condition = c("WT"="lightcoral","CRE"="chartreuse3","PRE"="mediumturquoise","MLEU"="purple") ))
 
 
@@ -170,18 +161,13 @@ dev.off()
 
 go <- data.frame(colnames(x), cl )
 
-# Replace by original
-go <- read.csv(".../Top_1000_most_variable_genes_Cluster8.csv")[,2:3]
-
 
 library(limma)
 library(org.Mm.eg.db)
 library(GO.db)
 library(GOstats)
 library(biomaRt)
-library(ggplot2)
 
-library(biomaRt)
 ensembl84 <- useMart(host='http://may2024.archive.ensembl.org',
                      biomart='ENSEMBL_MART_ENSEMBL',
                      dataset='mmusculus_gene_ensembl')
@@ -192,7 +178,7 @@ matches <- grep("entrez", A, value = TRUE, ignore.case = TRUE)
 
 for (i in 1:optimal_K){
   print(i)
-  ## First, get Entrez Gene identifiers  fot our list of interest
+  # First, get Entrez Gene identifiers  fot our list of interest
   ens_id_interest <- go[ which(go$cl == i), 1]
   
   my_entrez_gene <- getBM(attributes='entrezgene_id',
