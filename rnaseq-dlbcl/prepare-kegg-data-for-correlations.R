@@ -250,7 +250,6 @@ unique_q <- mixedsort(unique(as.character(quartile_labels)))
 N <- nrow(MM0)
 for (i in unique_q ){
   print(i)
-  # get mean log2(TMM + 1)
   median_value_inQuartile <- median(  MM0[, which (quartile_labels == i )]  ) 
   mean_value_inQuartile <- mean(  MM0[, which (quartile_labels == i )]  ) 
   
