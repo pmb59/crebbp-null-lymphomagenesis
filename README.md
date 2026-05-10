@@ -1,4 +1,4 @@
-# Single Cell and Multi-Omics Analyses of Lymphomagenesis
+# Single-cell and multiomics analyses of lymphomagenesis
 
 This repository contains scripts and workflows for analyzing omics data, including:
 
@@ -13,8 +13,5 @@ This project studies lymphoma evolution, aiming to elucidate the molecular mecha
 
 The analyses in this repository accompany the manuscript:
 
-> Horton et al. *CREBBP-loss confers metabolic and epigenetic vulnerabilities upon lymphoma cells.* (Unpublished)
+> Horton et al. *CREBBP-loss confers metabolic and epigenetic vulnerabilities upon lymphoma cells.* 
 
-## Contributing
-
-If you wish to contribute to this project, please submit a pull request.
