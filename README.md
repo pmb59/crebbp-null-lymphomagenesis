@@ -1,8 +1,7 @@
-# Single-cell and multiomics analyses of lymphomagenesis
+# Multiomics analyses of lymphomagenesis
 
 This repository contains scripts and workflows for analyzing omics data, including:
 
-- 10X single-cell RNA-seq of B220+ splenocytes from four longitudinal stages of disease evolution in mice
 - Bulk RNA-seq
 - ChIP-seq
 - Acetylproteomics
